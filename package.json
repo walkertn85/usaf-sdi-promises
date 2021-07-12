@@ -15,11 +15,12 @@
   "dependencies": {
     "bluebird": "^3.3.4",
     "chai": "^3.2.0",
+    "chai-as-promised": "^7.1.1",
     "clarifai": "^2.4.0",
     "colors": "^1.1.2",
     "eslint-config-hackreactor": "git://github.com/hackreactor-labs/eslint-config-hackreactor",
-    "mocha": "^2.2.5",
-    "nock": "^2.15.0",
+    "mocha": "^2.5.3",
+    "nock": "^2.18.2",
     "request": "^2.61.0"
   }
 }
