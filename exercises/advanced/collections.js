@@ -7,7 +7,13 @@
  *      - i.e. the second line in the new file should be the first line of `filePaths[1]`
  *    4. Writes the new file to the file located at `writePath`
  */
-
+ var fs = require('fs');
+ var request = require('request');
+ var crypto = require('crypto');
+ var Promise = require('bluebird');
+ Promise.promisifyAll(require("request"));
+ Promise.promisifyAll(fs);
+ 
 
 var combineFirstLineOfManyFiles = function(filePaths, writePath) {
  // TODO

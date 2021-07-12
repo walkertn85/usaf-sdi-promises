@@ -10,6 +10,7 @@
  Promise.promisifyAll(require("request"));
  Promise.promisifyAll(fs);
  
+ 
  // (1) Asyncronous HTTP request
  var getGitHubProfile = function(user, callback) {
    var options = {
@@ -65,17 +66,24 @@
  //added the "Primise.promisify()"
  var readFileAndMakeItFunnyAsync = function(filePath) {
    return new Promise(function(resolve, reject){
-     fs.readFile(filePath, 'utf8',(err, file) =>{
-     if (err) reject(err);
- 
+     fs.readFile(filePath, 'utf8',function(err, file){
+     if (err) {
+     reject(err)
+   }else{
      var funnyFile = file.split('\n')
-       .map(function(line) {
+     .map(function(line) {
          return line + ' lol';
-       }).join('\n');
+       })
+       .join('\n');
+ 
      resolve(funnyFile);
  }
-   )})}
+ });
+ });
+ }
+ 
  // Export these functions so we can test them and reuse them in later exercises
+ 
  module.exports = {
    getGitHubProfileAsync: getGitHubProfileAsync,
    generateRandomTokenAsync: generateRandomTokenAsync,
