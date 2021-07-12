@@ -8,16 +8,25 @@
  *    4. Writes the new file to the file located at `writePath`
  */
  var fs = require('fs');
- var request = require('request');
- var crypto = require('crypto');
  var Promise = require('bluebird');
- Promise.promisifyAll(require("request"));
+ var request = require('request');
  Promise.promisifyAll(fs);
- 
+ Promise.promisifyAll(require('request'));
+
+
+ var promiseConstructorFile = require ('../bare_minimum/promiseConstructor.js')
+ //var basicChainingFile = require ('../bare_minimum/basicChaining.js')
+
 
 var combineFirstLineOfManyFiles = function(filePaths, writePath) {
- // TODO
-};
+  const promise1 = promiseConstructorFile.pluckFirstLineFromFileAsync(filePaths[0]);
+  const promise2 = promiseConstructorFile.pluckFirstLineFromFileAsync(filePaths[1]);
+  const promise3 = promiseConstructorFile.pluckFirstLineFromFileAsync(filePaths[2]);
+ return new Promise(function(resolve, reject){
+ Promise.all([promise1, promise2, promise3]).then((values) => {fs.writeFile(writePath, values.join('\n'), (err)=> {
+if(err) reject (err);
+ })})
+})};
 
 // Export these functions so we can unit test them
 module.exports = {
